@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { ElMessageBox } from 'element-plus'
 
-import avatarImg from '@/assets/imgs/avatar.gif'
 import { useDesign } from '@/hooks/web/useDesign'
 import { useTagsViewStore } from '@/store/modules/tagsView'
 import { useUserStore } from '@/store/modules/user'
@@ -20,8 +19,10 @@ const { getPrefixCls } = useDesign()
 
 const prefixCls = getPrefixCls('user-info')
 
-const avatar = computed(() => userStore.user.avatar || avatarImg)
+const avatar = computed(() => userStore.user.avatar || '')
 const userName = computed(() => userStore.user.nickname ?? 'Admin')
+// 未设置头像时，展示昵称首字
+const avatarText = computed(() => userName.value.charAt(0))
 
 const loginOut = async () => {
   try {
@@ -40,7 +41,9 @@ const loginOut = async () => {
 <template>
   <ElDropdown class="custom-hover" :class="prefixCls" trigger="click">
     <div class="flex items-center">
-      <ElAvatar :src="avatar" alt="" class="w-[calc(var(--logo-height)-25px)] rounded-[50%]" />
+      <ElAvatar :src="avatar" alt="" class="w-[calc(var(--logo-height)-25px)] rounded-[50%]">
+        {{ avatarText }}
+      </ElAvatar>
       <span class="pl-[5px] text-14px text-[var(--top-header-text-color)] <lg:hidden">
         {{ userName }}
       </span>

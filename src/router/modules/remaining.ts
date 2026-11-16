@@ -53,7 +53,7 @@ const remainingRouter: AppRouteRecordRaw[] = [
   {
     path: '/',
     component: Layout,
-    redirect: '/index',
+    redirect: '/operations-maintenance',
     name: 'Home',
     meta: {
       hidden: true

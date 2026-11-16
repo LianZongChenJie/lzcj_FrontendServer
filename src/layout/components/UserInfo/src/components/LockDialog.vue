@@ -2,7 +2,6 @@
 import { useValidator } from '@/hooks/web/useValidator'
 import { useDesign } from '@/hooks/web/useDesign'
 import { useLockStore } from '@/store/modules/lock'
-import avatarImg from '@/assets/imgs/avatar.gif'
 import { useUserStore } from '@/store/modules/user'
 
 const { getPrefixCls } = useDesign()
@@ -21,8 +20,10 @@ const props = defineProps({
 })
 
 const userStore = useUserStore()
-const avatar = computed(() => userStore.user.avatar || avatarImg)
+const avatar = computed(() => userStore.user.avatar || '')
 const userName = computed(() => userStore.user.nickname ?? 'Admin')
+// 未设置头像时，展示昵称首字
+const avatarText = computed(() => userName.value.charAt(0))
 
 const emit = defineEmits(['update:modelValue'])
 
@@ -67,7 +68,9 @@ const handleLock = async () => {
     :title="dialogTitle"
   >
     <div class="flex flex-col items-center">
-      <img :src="avatar" alt="" class="w-70px h-70px rounded-[50%]" />
+      <ElAvatar :src="avatar" alt="" :size="70" class="rounded-[50%]">
+        <span class="text-24px">{{ avatarText }}</span>
+      </ElAvatar>
       <span class="text-14px my-10px text-[var(--top-header-text-color)]">
         {{ userName }}
       </span>

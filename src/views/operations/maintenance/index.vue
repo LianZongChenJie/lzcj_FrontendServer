@@ -4,11 +4,11 @@
     <div
       class="mb-16px flex items-center gap-12px rounded-8px border border-[var(--el-border-color-light)] bg-[var(--el-bg-color)] p-16px"
     >
-      <div
+      <!-- <div
         class="flex h-48px w-48px flex-none items-center justify-center rounded-8px bg-[var(--el-color-primary-light-9)]"
       >
         <Icon icon="ep:wrench" :size="28" class="text-[var(--el-color-primary)]" />
-      </div>
+      </div> -->
       <div class="min-w-0 flex-1">
         <div class="text-20px font-600 leading-28px text-[var(--el-text-color-primary)]">
           网站内容管理
@@ -17,7 +17,7 @@
           统一管理官网展示内容：首页、公司业务、公司动态、加入我们
         </div>
       </div>
-      <el-tag type="primary" effect="light">Site Content</el-tag>
+      <!-- <el-tag type="primary" effect="light">Site Content</el-tag> -->
     </div>
 
     <!-- Tab 切换管理模块 -->
@@ -321,7 +321,12 @@
                 <el-table-column label="排序" prop="sort" width="80" />
                 <el-table-column label="状态" width="90">
                   <template #default="scope">
-                    <el-switch v-model="scope.row.status" :active-value="1" :inactive-value="0" disabled />
+                    <el-switch
+                      v-model="scope.row.status"
+                      :active-value="1"
+                      :inactive-value="0"
+                      disabled
+                    />
                   </template>
                 </el-table-column>
                 <el-table-column label="操作" width="150" fixed="right">
@@ -919,7 +924,12 @@
 
     <!-- 发展历程表单 -->
     <Dialog v-model="milestoneDialogVisible" :title="milestoneDialogTitle" width="600px">
-      <el-form :model="milestoneForm" :rules="milestoneRules" ref="milestoneFormRef" label-width="100px">
+      <el-form
+        :model="milestoneForm"
+        :rules="milestoneRules"
+        ref="milestoneFormRef"
+        label-width="100px"
+      >
         <el-form-item label="年份" prop="year" required>
           <el-input-number
             v-model="milestoneForm.year"
@@ -983,15 +993,15 @@
     <!-- 资质荣誉表单 -->
     <Dialog v-model="honorDialogVisible" :title="honorDialogTitle" width="600px">
       <el-form :model="honorForm" ref="honorFormRef" label-width="100px">
-          <el-form-item label="证书图片" required>
-            <UploadImg
-              v-model="honorForm.image"
-              :width="'150px'"
-              :height="'150px'"
-              :fileSize="15"
-              directory="site/honor"
-            />
-          </el-form-item>
+        <el-form-item label="证书图片" required>
+          <UploadImg
+            v-model="honorForm.image"
+            :width="'150px'"
+            :height="'150px'"
+            :fileSize="15"
+            directory="site/honor"
+          />
+        </el-form-item>
         <el-form-item label="名称" required>
           <el-input v-model="honorForm.name" placeholder="请输入荣誉/资质名称" />
         </el-form-item>
@@ -1004,18 +1014,18 @@
         <el-form-item label="获得年份">
           <el-input v-model="honorForm.date" placeholder="如：2024" />
         </el-form-item>
-          <el-form-item label="排序号">
-            <el-input-number v-model="honorForm.sort" :min="0" />
-          </el-form-item>
-          <el-form-item label="状态">
-            <el-switch v-model="honorForm.status" :active-value="1" :inactive-value="0" />
-          </el-form-item>
-        </el-form>
-        <template #footer>
-          <el-button @click="honorDialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="saveHonor">保 存</el-button>
-        </template>
-      </Dialog>
+        <el-form-item label="排序号">
+          <el-input-number v-model="honorForm.sort" :min="0" />
+        </el-form-item>
+        <el-form-item label="状态">
+          <el-switch v-model="honorForm.status" :active-value="1" :inactive-value="0" />
+        </el-form-item>
+      </el-form>
+      <template #footer>
+        <el-button @click="honorDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="saveHonor">保 存</el-button>
+      </template>
+    </Dialog>
 
     <!-- 产品表单 -->
     <Dialog v-model="productDialogVisible" :title="productDialogTitle" width="700px">
@@ -1155,13 +1165,13 @@
     <!-- 技术服务表单 -->
     <Dialog v-model="techServiceDialogVisible" :title="techServiceDialogTitle" width="600px">
       <el-form :model="techServiceForm" ref="techServiceFormRef" label-width="100px">
-<el-form-item label="服务行业" required>
-<el-select
-v-model="techServiceForm.industry"
-placeholder="请选择服务行业"
-@change="handleTechServiceIndustryChange"
->
-<el-option label="政务" value="政务" />
+        <el-form-item label="服务行业" required>
+          <el-select
+            v-model="techServiceForm.industry"
+            placeholder="请选择服务行业"
+            @change="handleTechServiceIndustryChange"
+          >
+            <el-option label="政务" value="政务" />
             <el-option label="教育" value="教育" />
             <el-option label="医疗" value="医疗" />
             <el-option label="金融" value="金融" />
@@ -1169,26 +1179,26 @@ placeholder="请选择服务行业"
             <el-option label="服务业" value="服务业" />
           </el-select>
         </el-form-item>
-<el-form-item label="图标标识" required>
-<el-select
-v-model="techServiceForm.icon"
-placeholder="请选择图标标识"
-clearable
-class="!w-full"
->
-<el-option
-v-for="item in techServiceIconOptions"
-:key="item.value"
-:label="item.label"
-:value="item.value"
->
-<div class="flex items-center">
-<Icon :icon="item.value" :size="18" class="mr-8px" />
-<span>{{ item.label }}</span>
-</div>
-</el-option>
-</el-select>
-</el-form-item>
+        <el-form-item label="图标标识" required>
+          <el-select
+            v-model="techServiceForm.icon"
+            placeholder="请选择图标标识"
+            clearable
+            class="!w-full"
+          >
+            <el-option
+              v-for="item in techServiceIconOptions"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+              <div class="flex items-center">
+                <Icon :icon="item.value" :size="18" class="mr-8px" />
+                <span>{{ item.label }}</span>
+              </div>
+            </el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item label="服务描述">
           <el-input
             v-model="techServiceForm.description"
@@ -1319,7 +1329,7 @@ v-for="item in techServiceIconOptions"
 
     <!-- 招聘表单 -->
     <Dialog v-model="jobDialogVisible" :title="jobDialogTitle" width="700px">
-        <el-form :model="jobForm" label-width="100px">
+      <el-form :model="jobForm" label-width="100px">
         <el-form-item label="职位名称" required>
           <el-input v-model="jobForm.title" placeholder="请输入职位名称" />
         </el-form-item>
@@ -1380,7 +1390,7 @@ v-for="item in techServiceIconOptions"
 
     <!-- 分公司表单 -->
     <Dialog v-model="branchDialogVisible" :title="branchDialogTitle" width="600px">
-        <el-form :model="branchForm" label-width="100px">
+      <el-form :model="branchForm" label-width="100px">
         <el-form-item label="城市名称" required>
           <el-input v-model="branchForm.city" placeholder="请输入城市/分公司名称" />
         </el-form-item>
@@ -2002,11 +2012,11 @@ const openProductForm = (type: string, productType: string, row?: any) => {
     Object.assign(productForm, row)
     productDialogTitle.value = '编辑产品'
   } else {
-      Object.assign(productForm, {
-        id: undefined,
-        name: '',
-        image: '',
-        type: productType,
+    Object.assign(productForm, {
+      id: undefined,
+      name: '',
+      image: '',
+      type: productType,
       summary: '',
       description: '',
       features: [],
@@ -2036,10 +2046,10 @@ const removeScenario = (idx: number) => productForm.scenarios.splice(idx, 1)
 const saveProduct = async () => {
   try {
     await productFormRef.value?.validate()
-      if (!productForm.image) {
-        message.error('请上传产品图片')
-        return
-      }
+    if (!productForm.image) {
+      message.error('请上传产品图片')
+      return
+    }
     if (productForm.id) {
       await ProductApi.updateProduct(productForm)
       message.success('更新成功')

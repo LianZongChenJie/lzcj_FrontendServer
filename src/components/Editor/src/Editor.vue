@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { PropType } from 'vue'
 import { Editor, Toolbar } from '@wangeditor-next/editor-for-vue'
+// wangEditor 样式（使用普通 CSS 导入，避免 <style src> 在打包时生成带查询参数的虚拟模块名）
+import '@wangeditor-next/editor/dist/css/style.css'
 import { i18nChangeLanguage, IDomEditor, IEditorConfig } from '@wangeditor-next/editor'
 import { propTypes } from '@/utils/propTypes'
 import { isNumber } from '@/utils/is'
@@ -223,5 +225,3 @@ defineExpose({
     />
   </div>
 </template>
-
-<style src="@wangeditor-next/editor/dist/css/style.css"></style>

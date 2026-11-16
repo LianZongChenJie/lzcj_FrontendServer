@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { Editor, Toolbar } from '@wangeditor-next/editor-for-vue'
 import { IDomEditor } from '@wangeditor-next/editor'
+// wangEditor 样式（使用普通 CSS 导入，避免 <style src> 在打包时生成带查询参数的虚拟模块名）
+import '@wangeditor-next/editor/dist/css/style.css'
 import MentionModal from './MentionModal.vue'
 
 const emit = defineEmits(['confirm'])
@@ -112,5 +114,3 @@ onBeforeUnmount(() => {
     </div>
   </el-dialog>
 </template>
-
-<style src="@wangeditor-next/editor/dist/css/style.css"></style>
